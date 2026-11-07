@@ -1,8 +1,9 @@
 name: Release
 
-# Pushing a version tag (e.g. v0.5.0) publishes a GitHub release, which HACS
-# offers as an update. Tests are not rerun: main only takes commits that pass.
-# The release notes are the tag's annotation, so create tags with `git tag -a`.
+# Pushing a version tag (e.g. v0.5.0) publishes a GitHub release, which the
+# Marketplace (HACS) offers as an update. Tests are not rerun: main only
+# takes commits that pass. The release notes are the tag's annotation, so
+# create tags with `git tag -a`.
 on:
   push:
     tags: ["v*"]
@@ -20,7 +21,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
-      # The tag must match manifest.json, which HACS and HA show as the
+      # The tag must match manifest.json, which the Marketplace and HA show as the
       # installed version.
       - name: Check tag matches manifest version
         env:

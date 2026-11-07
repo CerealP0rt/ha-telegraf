@@ -1,6 +1,6 @@
 # ha-telegraf
 
-Home Assistant custom integration (domain `telegraf`, HACS custom repo) that
+Home Assistant custom integration (domain `telegraf`, Marketplace/HACS custom repository) that
 receives metrics pushed by Telegraf's `[[outputs.http]]` (JSON serializer) on
 a local-only webhook and auto-creates sensor entities, one device per `host`.
 
@@ -65,7 +65,11 @@ HA APIs that exist in the target, even when tests run on a newer HA.
 - All user-facing strings go in `strings.json` and are mirrored to
   `translations/en.json`.
 
-## HACS requirements
+## Marketplace (HACS) requirements
+
+Home Assistant's Marketplace (2026.11+) is HACS built into core and uses
+the same `hacs.json` and repository rules.
+
 
 - Exactly one integration under `custom_components/telegraf/`.
 - `manifest.json` must keep: `domain`, `name`, `version`, `documentation`,
@@ -76,7 +80,8 @@ HA APIs that exist in the target, even when tests run on a newer HA.
   as the annotation. Pushing the tag runs `.github/workflows/release.yml`:
   a check that the tag equals `v` + the manifest version, then a GitHub
   release (`gh release create --notes-from-tag`; tags with `-` become
-  pre-releases). HACS offers that release as the update.
+  pre-releases). The Marketplace offers that release as the
+  update (pre-releases only to users who turn on its *Pre-release* switch).
 - `hacs.json` at repo root: `name`, minimum `homeassistant`.
 - No hassfest/HACS GitHub actions: they pull mutable container images
   (`hassfest:latest`, `hacs/action:main`). Run hassfest by hand when needed,
@@ -87,7 +92,8 @@ HA APIs that exist in the target, even when tests run on a newer HA.
 
 ## Git
 
-- Local-only repo, **no remote — never push**. Committing to `main` is fine.
+- Remote: `origin` on GitHub. **Never push to `main`**; all changes go
+  through pull requests from a feature branch.
 - One concern per commit, with messages that explain what changed and why.
 
 ## Manual testing on a real HA

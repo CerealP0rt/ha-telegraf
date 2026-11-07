@@ -18,11 +18,18 @@ Requires Home Assistant 2026.10 or newer.
 
 ## Installation
 
-### HACS (recommended)
+### Marketplace (recommended)
 
-1. HACS → ⋮ → *Custom repositories* → add this repository's URL, category
-   *Integration*.
-2. Install **Telegraf**, then restart Home Assistant.
+Home Assistant 2026.11 and newer have the Marketplace built in.
+
+1. *Settings → Marketplace → Add from link* → enter
+   `CerealP0rt/ha-telegraf`, then *Add*. (The Marketplace asks you to
+   connect GitHub first if you haven't yet.)
+2. Open **Telegraf** in the list, select *Install*, then restart Home
+   Assistant if the repair under *Settings → System → Repairs* asks you to.
+
+On Home Assistant 2026.10, add the repository to HACS as a custom
+repository of type *Integration* instead.
 
 ### Manual
 
