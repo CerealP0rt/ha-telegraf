@@ -1,0 +1,14 @@
+{
+  "domain": "telegraf",
+  "name": "Telegraf",
+  "categories": ["computers_network.monitoring"],
+  "codeowners": ["@CerealP0rt"],
+  "config_flow": true,
+  "dependencies": ["webhook"],
+  "documentation": "https://github.com/CerealP0rt/ha-telegraf",
+  "integration_type": "hub",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/CerealP0rt/ha-telegraf/issues",
+  "requirements": [],
+  "version": "0.5.0"
+}

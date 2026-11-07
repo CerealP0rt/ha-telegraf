@@ -1,0 +1,40 @@
+{
+  "metrics": [
+    {
+      "fields": {"usage_idle": 97.1, "usage_user": 1.9, "usage_system": 1.0},
+      "name": "cpu",
+      "tags": {"cpu": "cpu-total", "host": "nas"},
+      "timestamp": 1760090400
+    },
+    {
+      "fields": {"total": 16624070656, "used_percent": 41.5, "available": 9726160896},
+      "name": "mem",
+      "tags": {"host": "nas"},
+      "timestamp": 1760090400
+    },
+    {
+      "fields": {"free": 102498115584, "used_percent": 55.2, "inodes_used": 412044},
+      "name": "disk",
+      "tags": {"device": "sda1", "fstype": "ext4", "host": "nas", "mode": "rw", "path": "/"},
+      "timestamp": 1760090400
+    },
+    {
+      "fields": {"bytes_recv": 123456789, "bytes_sent": 98765432, "packets_recv": 1000},
+      "name": "net",
+      "tags": {"host": "nas", "interface": "eth0"},
+      "timestamp": 1760090400
+    },
+    {
+      "fields": {"load1": 0.42, "uptime": 86400, "n_cpus": 4, "uptime_format": "1 day,  0:00"},
+      "name": "system",
+      "tags": {"host": "nas"},
+      "timestamp": 1760090400
+    },
+    {
+      "fields": {"temp": 48.0},
+      "name": "temp",
+      "tags": {"host": "pi", "sensor": "cpu_thermal"},
+      "timestamp": 1760090400
+    }
+  ]
+}

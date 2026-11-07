@@ -1,0 +1,37 @@
+# serializer version: 1
+# name: test_diagnostics_redacts_webhook
+  dict({
+    'entry': dict({
+      'data': dict({
+        'webhook_id': '**REDACTED**',
+      }),
+      'options': dict({
+      }),
+    }),
+    'hub': dict({
+      'available_count': 17,
+      'cap_reached': False,
+      'connected_hosts': list([
+        'nas',
+        'pi',
+      ]),
+      'connectivity_timeout': 300,
+      'entity_count': 19,
+      'hosts': list([
+        'nas',
+        'pi',
+      ]),
+      'max_entities': 500,
+      'measurements': dict({
+        'cpu': 3,
+        'disk': 3,
+        'mem': 3,
+        'net': 3,
+        'system': 4,
+        'temp': 1,
+      }),
+      'sensor_count': 17,
+      'stale_timeout': 1800,
+    }),
+  })
+# ---

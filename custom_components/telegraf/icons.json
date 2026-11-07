@@ -1,0 +1,44 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "reboot": {
+        "default": "mdi:restart",
+        "state": {
+          "on": "mdi:restart-alert"
+        }
+      }
+    },
+    "sensor": {
+      "cpu": {
+        "default": "mdi:cpu-64-bit"
+      },
+      "disk": {
+        "default": "mdi:harddisk"
+      },
+      "fan": {
+        "default": "mdi:fan"
+      },
+      "kernel_version": {
+        "default": "mdi:chip"
+      },
+      "memory": {
+        "default": "mdi:memory"
+      },
+      "network": {
+        "default": "mdi:server-network"
+      },
+      "power_cycle_count": {
+        "default": "mdi:power-cycle"
+      },
+      "unsafe_shutdowns": {
+        "default": "mdi:power-plug-off"
+      },
+      "uptime_format": {
+        "default": "mdi:clock-outline"
+      },
+      "users": {
+        "default": "mdi:account-multiple"
+      }
+    }
+  }
+}

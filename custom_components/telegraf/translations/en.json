@@ -1,0 +1,65 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a Telegraf receiver",
+        "description": "Creates a local-only webhook that Telegraf's `outputs.http` plugin can send metrics to. Sensors are created automatically as metrics arrive.",
+        "data": {
+          "name": "Name"
+        },
+        "data_description": {
+          "name": "Shown as the integration entry title, e.g. the Telegraf instance it receives from."
+        }
+      }
+    },
+    "error": {
+      "name_required": "Enter a name."
+    },
+    "create_entry": {
+      "default": "Webhook URL (reachable from your local network only):\n\n`{webhook_url}`\n\nAdd this to your Telegraf configuration and restart Telegraf:\n\n```toml\n{telegraf_config}\n```\n\nOnly a few core sensors (CPU, memory, swap, load, boot time, temperatures) are enabled automatically. Everything else Telegraf sends, including disks and network interfaces, is added **disabled**: enable what you want on the device page, or in bulk under Settings → Entities.\n\n**Tip:** if you use `[[inputs.sensors]]` (lm-sensors), choose `remove_numbers` (default `true` gives `fan_input`, `false` gives `fan1_input`) before sending data and keep it. Both styles get correct units, but the field name is part of each sensor's identity: changing the setting later creates new sensors and leaves the old ones unavailable.\n\nYou can see the URL again in the integration's options."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Telegraf options",
+        "description": "Webhook URL: `{webhook_url}`",
+        "data": {
+          "include_measurements": "Include measurements",
+          "exclude_measurements": "Exclude measurements",
+          "stale_timeout": "Stale timeout",
+          "connectivity_timeout": "Connectivity timeout",
+          "max_entities": "Maximum number of entities",
+          "local_only": "Only accept requests from the local network"
+        },
+        "data_description": {
+          "include_measurements": "Only create sensors for measurements matching one of these glob patterns (e.g. `cpu`, `disk*`). Leave empty to include all. Existing sensors that no longer match are removed.",
+          "exclude_measurements": "Never create sensors for measurements matching these glob patterns. Takes precedence over includes; existing sensors that now match are removed.",
+          "stale_timeout": "Mark a sensor unavailable if no value arrived for this many seconds. Keep it above your longest Telegraf collection interval. 0 = never.",
+          "connectivity_timeout": "Turn a host's Connectivity off if it sent nothing at all for this many seconds. 0 = never.",
+          "max_entities": "Safety limit for automatically created entities. Each host's Connectivity counts too, so a new host needs room for two.",
+          "local_only": "Uses Home Assistant's local-network check, which only accepts private addresses (e.g. `192.168.x.x`, `fdxx::`). Turn this off if Telegraf reaches Home Assistant over global IPv6 addresses and the log shows `Received remote request for local webhook`. Requests through Home Assistant Cloud (Nabu Casa) are always rejected, but when this is off, anyone who can reach Home Assistant directly and knows the webhook URL can send metrics."
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "connectivity": {
+        "name": "Connectivity"
+      },
+      "reboot": {
+        "state": {
+          "on": "Yes",
+          "off": "No"
+        }
+      }
+    }
+  },
+  "issues": {
+    "entity_cap_reached": {
+      "title": "Telegraf entity limit reached",
+      "description": "The Telegraf entry **{title}** reached its limit of {max_entities} entities, so new metrics are ignored and no new sensors are created.\n\nRaise **Maximum number of entities** in the integration's options, or filter the metrics Telegraf sends (e.g. with `namepass`/`fieldinclude` or the integration's include/exclude measurements). Changing the options reloads the entry and clears this issue."
+    }
+  }
+}

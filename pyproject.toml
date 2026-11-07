@@ -1,0 +1,40 @@
+[project]
+name = "ha-telegraf"
+version = "0.5.0"
+description = "Home Assistant custom integration receiving Telegraf metrics via a local-only webhook"
+readme = "README.md"
+license = "Unlicense"
+license-files = ["LICENSE"]
+requires-python = ">=3.14.2"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest-homeassistant==2026.11.0",
+    "ruff>=0.13",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+# respx's own plugin would claim httpx before HA's alias (pytest-homeassistant).
+addopts = "-p no:respx"
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "ASYNC", "RUF", "PL", "PT"]
+ignore = ["PLR0913", "PLR2004", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLR0917"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["custom_components"]

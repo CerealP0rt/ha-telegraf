@@ -1,0 +1,34 @@
+version: 2
+updates:
+  # GitHub Actions: keeps the commit-SHA pins and their version comments
+  # in .github/workflows current.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    # Supply chain: only propose releases that have been out for a week,
+    # so a compromised release has time to be noticed and pulled.
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
+
+  # Python (uv): pyproject.toml and uv.lock.
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      # pytest-homeassistant pins Home Assistant itself; its bumps get their
+      # own PR (check .python-version; hacs.json stays the dev target).
+      dev-tools:
+        patterns: ["*"]
+        exclude-patterns: ["pytest-homeassistant"]
+    commit-message:
+      prefix: build
+      include: scope

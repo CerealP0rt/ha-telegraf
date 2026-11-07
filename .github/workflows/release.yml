@@ -1,0 +1,44 @@
+name: Release
+
+# Pushing a version tag (e.g. v0.5.0) publishes a GitHub release, which HACS
+# offers as an update. Tests are not rerun: main only takes commits that pass.
+# The release notes are the tag's annotation, so create tags with `git tag -a`.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # Actions pinned to commit SHAs; the comment names the version.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # The tag must match manifest.json, which HACS and HA show as the
+      # installed version.
+      - name: Check tag matches manifest version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(jq -r .version custom_components/telegraf/manifest.json)
+          if [ "$TAG" != "v$version" ]; then
+            echo "::error::Tag $TAG does not match manifest.json version $version"
+            exit 1
+          fi
+      # gh is preinstalled on GitHub's runners; no third-party release action.
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          prerelease=()
+          case "$TAG" in *-*) prerelease=(--prerelease) ;; esac
+          gh release create "$TAG" --verify-tag --notes-from-tag \
+            --title "$TAG" "${prerelease[@]}"
