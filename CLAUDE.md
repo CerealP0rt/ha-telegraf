@@ -87,7 +87,8 @@ HA APIs that exist in the target, even when tests run on a newer HA.
 
 ## Git
 
-- Local-only repo, **no remote — never push**. Committing to `main` is fine.
+- Remote: `origin` on GitHub. **Never push to `main`**; all changes go
+  through pull requests from a feature branch.
 - One concern per commit, with messages that explain what changed and why.
 
 ## Manual testing on a real HA
