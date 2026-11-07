@@ -1,6 +1,6 @@
 # Telegraf for Home Assistant — Functional Specification
 
-Status: draft v0.1 · Domain: `telegraf` · Distribution: HACS custom repository
+Status: draft v0.1 · Domain: `telegraf` · Distribution: Marketplace (HACS) custom repository
 
 This document is the source of truth for behavior. Code and tests follow it;
 when behavior changes, this file changes in the same commit. Section numbers
